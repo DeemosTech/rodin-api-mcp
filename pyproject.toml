@@ -1,7 +1,7 @@
 [project]
-name = "deemos-rodin-mcp"
+name = "rodin-api-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Exposing Deemos's Rodin API as MCP server"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -9,3 +9,12 @@ dependencies = [
     "jsonschema>=4.23.0",
     "mcp[cli]>=1.6.0",
 ]
+
+[project.scripts]
+rodin-api-mcp = "rodin_mcp.rodin:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+rodin_mcp = ["*.json"]
