@@ -20,21 +20,17 @@ To configure Claude Desktop to support MCP, follow these steps:
 
 1. Go to Claude > Settings > Developer > Edit Config > `claude_desktop_config.json` and include the following:
 
-   ```json
-   {
-       "mcpServers": {
-           "blender": {
-               "command": "uvx",
-               "args": [
-                   "run",
-                   "github.com/yourusername/rodin-api-mcp"
-               ],
-               "env": {
-                    "RODIN_API_KEY": <PROVIDE_YOUR_API_KEY_HERE>
-               }
-           }
-       }
-   }
-   ```
+    ```json
+    {
+        "mcpServers": {
+            "rodin": {
+                "command": "uvx",
+                "args": [
+                    "git+https://github.com/DeemosTech/rodin-api-mcp.git"
+                ]
+            }
+        }
+    }
+    ```
 
 2. If Claude Deskop is opened, quit it and restart Claude Desktop.
