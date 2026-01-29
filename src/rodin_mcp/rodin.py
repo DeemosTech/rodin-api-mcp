@@ -95,12 +95,12 @@ async def download_file(client: httpx.AsyncClient, url: str, file_path: str, ret
 @server.tool()
 async def try_download_result(
     parameters: DownloadRequestParameters
-) -> str | tuple[str, Optional[MCPImage], str]:
+) -> str | tuple[Optional[MCPImage], str]:
     """
     This tool will try to download the generated assets if the Rodin completed the generation task.
 
     [Notes]
-        - Always make sure an absolute path is given bu the user before calling this tool.
+        - Always make sure an absolute path is given by the user before calling this tool.
         - The tool expects a directory for the download_to_path parameter.
             - The tool will download files to {download_to_path}/{uuid}/ directory
             - So when giving example, don't include the filename
