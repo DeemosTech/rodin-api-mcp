@@ -9,9 +9,9 @@ import asyncio
 
 server = FastMCP('rodin-mcp')
 
-API_KEY = os.getenv(
-    'RODIN_API_KEY', 'g4FQt6KvTGXre2i98GopyXdTdddOnFTBcQF5Hfiu7z5asMm5bqoy7f3L1gFU4fZ0'
-)
+API_KEY = os.environ.get('RODIN_API_KEY')
+if not API_KEY:
+    raise RuntimeError("RODIN_API_KEY environment variable is required")
 
 def error_handle_response(response):
     try:
@@ -34,7 +34,7 @@ def error_handle_response(response):
             response=e.response if hasattr(e, 'response') else None
         ) from e
 
-@server.tool()
+@server.tool(structured_output=False)
 async def generate_3d_model(parameters: RodinParameters) -> dict | str:
     """
     This tool will call the Rodin API to generate a mesh and textures for the given images and prompt.
@@ -92,10 +92,10 @@ async def download_file(client: httpx.AsyncClient, url: str, file_path: str, ret
             else:
                 raise last_exc
 
-@server.tool()
+@server.tool(structured_output=False)
 async def try_download_result(
     parameters: DownloadRequestParameters
-) -> str | tuple[str, Optional[MCPImage], str]:
+) -> str | tuple[Optional[MCPImage], str]:
     """
     This tool will try to download the generated assets if the Rodin completed the generation task.
 
